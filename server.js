@@ -8,6 +8,7 @@ mongoose = require('mongoose'),
 Restaurant = require('./api/models/restaurant.model'),
 Menu = require('./api/models/menu.model'),
 Review = require('./api/models/review.model');
+Order = require('./api/models/order.model');
 
 bodyParser = require('body-parser');
 
@@ -47,6 +48,9 @@ menuRoutes(app); //registering the menu routes
 
 var reviewRoutes = require('./api/routes/review.routes'); //importing review routes
 reviewRoutes(app); //registering the review routes
+
+var orderRoutes = require('./api/routes/order.routes'); //importing order routes
+orderRoutes(app); //registering the order routes
 
 app.listen(port);
 
