@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/meatdb'); 
+mongoose.connect('mongodb://localhost/meatdb');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
