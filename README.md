@@ -7,7 +7,7 @@ NodeJS backend build to serve the REST APIs for the project [meat-app-angular](h
 To compile and run this project you will need:
 
 * [NodeJS](https://nodejs.org/)
-* [MongoDB](https://www.mongodb.com/) or latest
+* [MongoDB](https://www.mongodb.com/)
 
 ## 1. First steps
 
