@@ -17,7 +17,7 @@ To compile and run this project you will need:
 
 ### Restore the database if you want to have some example content
 
-In the command line execute `mongorestore.exe <project directory>/meat-app-nodejs/backup-meat-app` in the mongodb directory.
+In the command line execute `mongorestore.exe <project directory>/backup-meat-app` in the mongodb directory.
 
 If you are going to host your database somewhere but local, you need to change the connection string in the server.js file.
 
