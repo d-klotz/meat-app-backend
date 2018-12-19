@@ -9,8 +9,10 @@ Restaurant = require('./api/models/restaurant.model'),
 Menu = require('./api/models/menu.model'),
 Review = require('./api/models/review.model');
 Order = require('./api/models/order.model');
+User = require('./api/models/user.model');
 
 bodyParser = require('body-parser');
+authorization = require('./api/authz/authz.controller');
 
 
 // Add headers
@@ -40,17 +42,22 @@ mongoose.connect('mongodb://localhost/meatdb');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var restaurantRoutes = require('./api/routes/restaurant.routes'); //importing restaurant routes
-restaurantRoutes(app); //registering the restaurant routes
+//Protected routes
+app.use('/api', authorization.handleAuthorization);
 
-var menuRoutes = require('./api/routes/menu.routes'); //importing menu routes
-menuRoutes(app); //registering the menu routes
+//importing routes
+var restaurantRoutes = require('./api/routes/restaurant.routes'); 
+var menuRoutes = require('./api/routes/menu.routes');
+var reviewRoutes = require('./api/routes/review.routes');
+var orderRoutes = require('./api/routes/order.routes');
+var authRoutes = require('./api/auth/auth.routes');
 
-var reviewRoutes = require('./api/routes/review.routes'); //importing review routes
-reviewRoutes(app); //registering the review routes
-
-var orderRoutes = require('./api/routes/order.routes'); //importing order routes
-orderRoutes(app); //registering the order routes
+//registering the routes
+restaurantRoutes(app); 
+menuRoutes(app);
+reviewRoutes(app);
+orderRoutes(app);
+authRoutes(app);
 
 app.listen(port);
 
