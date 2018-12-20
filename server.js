@@ -1,9 +1,10 @@
-var express = require('express')
+var express = require('express');
+var cors = require('cors');
 
-app = express(),
+app = express();
 port = process.env.PORT || 3000;
 
-mongoose = require('mongoose'),
+mongoose = require('mongoose');
 
 Restaurant = require('./api/models/restaurant.model'),
 Menu = require('./api/models/menu.model'),
@@ -15,25 +16,19 @@ bodyParser = require('body-parser');
 authorization = require('./api/authz/authz.controller');
 
 
-// Add headers
-app.use(function (req, res, next) {
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
-});
+//Acts as a middleware to handle CORS Errors
+app.use((req, res, next) => { //doesn't send response just adjusts it
+    res.header("Access-Control-Allow-Origin", "*") //* to give access to any origin
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization" //to give access to all the headers provided
+    );
+    if(req.method === 'OPTIONS'){
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET'); //to give access to all the methods provided
+        return res.status(200).json({});
+    }
+    next(); //so that other routes can take over
+})
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
@@ -43,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Protected routes
-app.use('/api', authorization.handleAuthorization);
+app.use('/api/order', authorization.handleAuthorization);
 
 //importing routes
 var restaurantRoutes = require('./api/routes/restaurant.routes'); 
