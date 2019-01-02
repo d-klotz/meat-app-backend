@@ -23,7 +23,7 @@ var MenuSchema = new Schema({
   },
   restaurant_id: {
     type: ObjectId,
-    ref: 'restaurants',
+    ref: 'Restaurant',
     required: 'Kindly enter the restaurantID of the menuItem.'
   },
   imagePath: {

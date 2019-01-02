@@ -9,4 +9,8 @@ module.exports = function (app) {
 
   app.route('/createUser')
     .post(authController.create_new_user);
+
+  app.route('/user/:userId')
+  .put(authController.update_an_user)
+  .delete(authController.delete_an_user);
 }

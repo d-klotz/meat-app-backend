@@ -49,9 +49,9 @@ var Orderschema = new Schema({
             type: Number,
             required: 'Kindly enter the quantity.',
         },
-        menu_id: {
+        menu: {
             type: ObjectId,
-            ref: 'menus',
+            ref: 'Menu',
             required: 'Kindly enter the menu item.'
         },
     }
@@ -60,9 +60,13 @@ var Orderschema = new Schema({
     type: Date,
     default: Date.now
   },
-  user_id: {
+  user: {
     type: ObjectId,
     ref: 'users'
+  },
+  total: {
+    type: Number,
+    required: "Kindly enter the total price"
   }
 });
 

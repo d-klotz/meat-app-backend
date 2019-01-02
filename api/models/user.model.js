@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
   id: {
-    type: Number
+    type: String
   },
   name: {
     type: String,
@@ -19,6 +19,17 @@ var UserSchema = new Schema({
     type: String,
     required: 'Kindly enter the password.'
   },
+  address: {
+    type: String,
+    required: 'Kindly enter the address.'
+  },
+  number: {
+    type: Number,
+    required: 'Kindly enter the address number.'
+  },
+  complement: {
+    type: String
+  }
 });
 
 module.exports = mongoose.model('User', UserSchema);

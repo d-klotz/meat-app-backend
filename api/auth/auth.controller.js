@@ -18,7 +18,14 @@ exports.handleAuthentication = function (req, res) {
                  */
                 const token = jwt.sign({ sub: dbUser.email, iss: 'meat-api' }, apiConfig.secret)
 
-                res.json({ name: dbUser.name, email: dbUser.email, accessToken: token })
+                res.json({ id: dbUser._id,
+                            name: dbUser.name, 
+                            email: dbUser.email, 
+                            address: dbUser.address, 
+                            number: dbUser.number,  
+                            complement: dbUser.complement, 
+                            accessToken: token
+                        })
 
             } else {
                 res.status(403).json({ message: 'Invalid credencials.' });
@@ -37,3 +44,20 @@ exports.create_new_user = function (req, res) {
         res.json(user);
     });
 };
+
+exports.update_an_user = function (req, res) {
+    User.findOneAndUpdate({ _id: req.params.userId }, req.body, { new: true }, function (err, user) {
+        if (err)
+            res.send(err);
+        res.json(user);
+    });
+  };
+  
+  
+  exports.delete_an_user = function (req, res) {
+    User.find({ user_id: req.params.userId }, function (err, user) {
+      if (err)
+        res.send(err);
+      res.status(200);
+    });
+  };
